@@ -18,25 +18,27 @@ fun main() {
         hotel.tambahKamar(KamarSuite(301))
 
         // Menyiapkan staff (inheritance bertingkat)
-        hotel.tambahStaff(Resepsionis("Adrian", "08987654321"))
-        hotel.tambahStaff(Housekeeping("Putri", "08111222333"))
+        hotel.tambahStaff(Resepsionis("Adrian", "08123001"))
+        hotel.tambahStaff(Housekeeping("Putri", "08112233"))
         hotel.tampilkanStaff()
 
         // Membuat objek tamu
-        val tamu1 = Tamu("Rasya", "08123456789", "3209010101010001")
-        val tamu2 = Tamu("Yusuf")
-        println("\n" + tamu1.info())
+        println("\n=== Daftar Tamu " + namaHotel + "===")
+        val tamu1 = Tamu("Rasya", "081234567", "3209010101010001")
+        val tamu2 = Tamu("Yusuf", "089910233", "3209010101010005")
+        println(tamu1.info())
         println(tamu2.info())
 
         hotel.tampilkanKamar()
 
         // CHECK-IN
-        println("\n=== Check-in ===")
+        println("\n=== Check-in Tamu 1 ===")
         hotel.pesanKamar(tamu1, 201, 3)?.ringkasan()
         println()
         hotel.pesanKamar(tamu2, 201, 1)              // kamar sudah terisi
         hotel.pesanKamar(tamu2, 101, 0)              // lama inap tidak valid
-        hotel.pesanKamar(tamu2, 999, 1)              // kamar tidak ada
+        hotel.pesanKamar(tamu2, 999, 1)
+        println("\n=== Check-in Tamu 2 ===")
         hotel.pesanKamar(tamu2, 101, 2)?.ringkasan() // berhasil
 
         hotel.tampilkanKamar()
@@ -45,13 +47,6 @@ fun main() {
         println("\n=== Check-out ===")
         val selesai = hotel.checkOut(201)
         selesai?.ringkasan()
-        selesai?.cetakStruk()                        // fungsi dari interface
-        hotel.checkOut(201)                 // sudah check-out sebelumnya
-
-        hotel.tampilkanKamar()
-        hotel.tampilkanReservasi()
-
-        // Overloading: cari berdasarkan jenis
-        println("\nKamar Suite kosong: ${hotel.cariKamar("Suite").size}")
+        selesai?.cetakStruk()  // fungsi dari interface
     }
 }
